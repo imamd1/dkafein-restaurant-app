@@ -23,7 +23,7 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
   }
 
   route() {
-    Navigator.pushReplacementNamed(context, MainPage.routeName);
+    Navigation.intentWithData(MainPage.routeName, '');
   }
 
   @override

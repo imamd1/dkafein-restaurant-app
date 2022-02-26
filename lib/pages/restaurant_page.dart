@@ -15,13 +15,31 @@ class RestaurantPage extends StatelessWidget {
             return Center(child: CircularProgressIndicator(),);
 
           } else if (state.state == ResultState.HasData) {
-            return ListView.builder(
-              shrinkWrap: true,
-              itemCount: state.result.restaurants.length,
-              itemBuilder: (context, index) {
-                var restaurant = state.result.restaurants[index];
-                return CafeListCard(restaurant: restaurant);
-              });
+            return SingleChildScrollView(
+              child: Column(
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      Navigation.intentWithData(SearchPage.routeName, '');
+                    },
+                    child: Container(
+                      margin: EdgeInsets.all(defMargin),
+                      height: 50,
+                      width: 50,
+                      color: Colors.amber
+                    ),
+                  ),
+                  ListView.builder(
+                    physics: NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemCount: state.result.restaurants.length,
+                    itemBuilder: (context, index) {
+                      var restaurant = state.result.restaurants[index];
+                      return CafeListCard(restaurant: restaurant);
+                    }),
+                ],
+              ),
+            );
           } else if (state.state == ResultState.NoData) {
             return Center(child: Text(state.message),);
           } else if (state.state == ResultState.Error) {

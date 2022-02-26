@@ -15,3 +15,4 @@ part 'category.dart';
 part 'restaurant_detail.dart';
 part 'customer_review.dart';
 part 'restaurant_result.dart';
+part 'searchrestaurant.dart';

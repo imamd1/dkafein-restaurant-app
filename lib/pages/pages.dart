@@ -12,6 +12,8 @@ import 'package:submission_v2/provider/providers.dart';
 import 'package:submission_v2/theme/theme.dart';
 import 'package:submission_v2/widgets/widgets.dart';
 
+import '../common/navigation.dart';
+
 part 'detail_page.dart';
 part 'main_page.dart';
 part 'search_page.dart';

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:submission_v2/common/navigation.dart';
 import 'package:submission_v2/pages/pages.dart';
 
 void main() {
@@ -13,6 +14,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         title: 'dKaffein',
+        navigatorKey: navigatorKey,
         initialRoute: SplashScreenPage.routeName,
         routes: {
           SplashScreenPage.routeName: (context) => SplashScreenPage(),
@@ -20,6 +22,7 @@ class MyApp extends StatelessWidget {
           RestaurantPage.routeName: (context) => RestaurantPage(),
           DetailPage.routeName: (context) => DetailPage(id: ModalRoute.of(context)?.settings.arguments as String),
           SettingPage.routeName: (context) => SettingPage(),
+          SearchPage.routeName: (context) => SearchPage(),
           FavoritePage .routeName:(context) => FavoritePage()
         }
         // DetailScreen.routeName: (context) => DetailScreen(
