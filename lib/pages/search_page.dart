@@ -13,16 +13,14 @@ class _SearchPageState extends State<SearchPage> {
 
   // const SearchPage({ Key? key }) : super(key: key);
   Widget _searchResultData(BuildContext context) {
-    return ChangeNotifierProvider<SearchProvider>(
-      create: (_) => SearchProvider(apiService: ApiService()),
-      child: Consumer<SearchProvider>(builder: (context, state, _) {
+    return Consumer<SearchProvider>(builder: (context, state, _) {
         if (state.state == SearchState.Loading) {
           return Center(
               child: Container(
             child: Text('Cari Restoran mu'),
           ));
         } else if (state.state == SearchState.HasData) {
-          state.fetchSearchRestaurant(queries);
+          // state.fetchSearchRestaurant(queries);
           return ListView.builder(
               shrinkWrap: true,
               itemCount: state.result!.restaurants.length,
@@ -33,7 +31,7 @@ class _SearchPageState extends State<SearchPage> {
                 );
               });
         } else if (state.state == SearchState.NoData) {
-          state.fetchSearchRestaurant(queries);
+          // state.fetchSearchRestaurant(queries);
           return Center(child: Text(state.message));
         } else if (state.state == SearchState.Error) {
           return Center(
@@ -44,7 +42,7 @@ class _SearchPageState extends State<SearchPage> {
             child: Text(''),
           );
         }
-      }),
+      }
     );
   }
 
