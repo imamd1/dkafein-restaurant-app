@@ -14,38 +14,72 @@ class _SearchPageState extends State<SearchPage> {
   // const SearchPage({ Key? key }) : super(key: key);
   Widget _searchResultData(BuildContext context) {
     return Consumer<SearchProvider>(builder: (context, state, _) {
-        if (state.state == SearchState.Loading) {
-          return Center(
-              child: Container(
-            child: Text('Cari Restoran mu'),
-          ));
-        } else if (state.state == SearchState.HasData) {
-          // state.fetchSearchRestaurant(queries);
-          return ListView.builder(
-              shrinkWrap: true,
-              itemCount: state.result!.restaurants.length,
-              itemBuilder: (context, index) {
-                var restaurant = state.result!.restaurants[index];
-                return ListTile(
-                  title: Text(restaurant.name),
-                );
-              });
-        } else if (state.state == SearchState.NoData) {
-          // state.fetchSearchRestaurant(queries);
-          return Center(child: Text(state.message));
-        } else if (state.state == SearchState.Error) {
-          return Center(
-            child: Text(state.message),
-          );
-        } else {
-          return Center(
-            child: Text(''),
-          );
-        }
+      if (state.state == SearchState.Loading) {
+        return Center(
+            child: Container(
+          child: Text('Cari Restoran mu'),
+        ));
+      } else if (state.state == SearchState.HasData) {
+        // state.fetchSearchRestaurant(queries);
+        return ListView.builder(
+            shrinkWrap: true,
+            itemCount: state.result!.restaurants.length,
+            itemBuilder: (context, index) {
+              var restaurant = state.result!.restaurants[index];
+              return ListTile(
+                title: Text(restaurant.name),
+              );
+            });
+      } else if (state.state == SearchState.NoData) {
+        // state.fetchSearchRestaurant(queries);
+        return Center(
+            child: Column(
+          children: [
+            Container(
+              margin: EdgeInsets.only(top: 200),
+              width: 100,
+              height: 100,
+              decoration: BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage('assets/icons/folder-not-found.png'))),
+            ),
+            Container(child: Text('Opps, restaurant yang kamu cari tidak ada', style: resultText,),)
+          ],
+        ));
+      } else if (state.state == SearchState.Error) {
+        return Center(
+          child: Text(state.message),
+        );
+      } else {
+        return Center(
+          child: Text(''),
+        );
       }
-    );
+    });
   }
 
+  Widget _restaurantResult(BuildContext context) {
+    return Consumer<RestaurantProvider>(builder: (context, state, _) {
+      if(state.state == ResultState.Loading) {
+        return CircularProgressIndicator();
+      } else if (state.state == ResultState.HasData) {
+        return ListView.builder(
+          shrinkWrap: true,
+          itemCount: state.result.restaurants.length,
+          itemBuilder: (builder, index) {
+            final restaurant = state.result.restaurants[index];
+            return ListTile(title: Text(restaurant.name));
+          },
+        );
+      } else if (state.state == ResultState.NoData) {
+        return Center(child: Text(state.message),);
+      } else if (state.state == ResultState.Error) {
+        return Center(child: Text(state.message),);
+      } else {
+        return Center(child: Text(''),);
+      }
+    },);
+  }
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<SearchProvider>(
@@ -56,9 +90,6 @@ class _SearchPageState extends State<SearchPage> {
         return Scaffold(
             body: Stack(
           children: [
-            Container(
-              color: bgColor,
-            ),
             SafeArea(
                 child: Container(
               color: bgColor,
@@ -80,7 +111,7 @@ class _SearchPageState extends State<SearchPage> {
                       controller: _controller,
                       decoration: InputDecoration(
                           filled: true,
-                          hintText: "Cari Binatang...",
+                          hintText: "Cari Restaurant...",
                           hintStyle: TextStyle(fontSize: 14),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(40),
@@ -90,12 +121,12 @@ class _SearchPageState extends State<SearchPage> {
                             ),
                           )),
                     ))),
-            Center(
-              child: queries.isEmpty
-                  ? Center(
-                      child: Text('kosoong'),
-                    )
-                  : _searchResultData(context),
+            SafeArea(
+              child: Center(
+                child: queries.isEmpty
+                    ? _restaurantResult(context) : Text('')
+                    // : _searchResultData(context),
+              ),
             )
           ],
         ));

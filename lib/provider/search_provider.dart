@@ -34,20 +34,6 @@ class SearchProvider extends ChangeNotifier {
         notifyListeners();
         return _searchResult = search;
       }
-      // if (query.isNotEmpty) {
-      //   _state = SearchState.Loading;
-      //   _query = query;
-      //   final search = await apiService.searchRestaurant(query);
-      //   if (search.restaurants.isEmpty) {
-      //     _state = SearchState.NoData;
-      //     notifyListeners();
-      //     return _message = 'Empty Data';
-      //   } else {
-      //     _state = SearchState.HasData;
-      //     notifyListeners();
-      //     return _searchResult = search;
-      //   }
-      // }
     } catch (e) {
       _state = SearchState.Error;
       notifyListeners();

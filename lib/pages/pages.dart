@@ -21,3 +21,4 @@ part 'splash_screen.dart';
 part 'restaurant_page.dart';
 part 'favorite_page.dart';
 part 'setting_page.dart';
+part 'review_page.dart';

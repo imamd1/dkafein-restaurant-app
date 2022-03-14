@@ -23,7 +23,9 @@ class MyApp extends StatelessWidget {
           DetailPage.routeName: (context) => DetailPage(id: ModalRoute.of(context)?.settings.arguments as String),
           SettingPage.routeName: (context) => SettingPage(),
           SearchPage.routeName: (context) => SearchPage(),
-          FavoritePage .routeName:(context) => FavoritePage()
+          FavoritePage .routeName:(context) => FavoritePage(),
+          ReviewPage.routeName: (context) => ReviewPage(id: ModalRoute.of(context)?.settings.arguments as String),
+
         }
         // DetailScreen.routeName: (context) => DetailScreen(
         //   restaurant: ModalRoute.of(context)?.settings.arguments as Restaurant,
