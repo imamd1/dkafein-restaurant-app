@@ -26,9 +26,7 @@ class _SearchPageState extends State<SearchPage> {
             itemCount: state.result!.restaurants.length,
             itemBuilder: (context, index) {
               var restaurant = state.result!.restaurants[index];
-              return ListTile(
-                title: Text(restaurant.name),
-              );
+              return CustomCard(restaurant: restaurant);
             });
       } else if (state.state == SearchState.NoData) {
         // state.fetchSearchRestaurant(queries);
@@ -43,7 +41,12 @@ class _SearchPageState extends State<SearchPage> {
                   image: DecorationImage(
                       image: AssetImage('assets/icons/folder-not-found.png'))),
             ),
-            Container(child: Text('Opps, restaurant yang kamu cari tidak ada', style: resultText,),)
+            Container(
+              child: Text(
+                'Opps, restaurant yang kamu cari tidak ada',
+                style: resultText,
+              ),
+            )
           ],
         ));
       } else if (state.state == SearchState.Error) {
@@ -58,28 +61,37 @@ class _SearchPageState extends State<SearchPage> {
     });
   }
 
-  Widget _restaurantResult(BuildContext context) {
-    return Consumer<RestaurantProvider>(builder: (context, state, _) {
-      if(state.state == ResultState.Loading) {
-        return CircularProgressIndicator();
-      } else if (state.state == ResultState.HasData) {
-        return ListView.builder(
-          shrinkWrap: true,
-          itemCount: state.result.restaurants.length,
-          itemBuilder: (builder, index) {
-            final restaurant = state.result.restaurants[index];
-            return ListTile(title: Text(restaurant.name));
-          },
-        );
-      } else if (state.state == ResultState.NoData) {
-        return Center(child: Text(state.message),);
-      } else if (state.state == ResultState.Error) {
-        return Center(child: Text(state.message),);
-      } else {
-        return Center(child: Text(''),);
-      }
-    },);
-  }
+  // Widget _restaurantResult(BuildContext context) {
+  //   return Consumer<RestaurantProvider>(
+  //     builder: (context, state, _) {
+  //       if (state.state == ResultState.Loading) {
+  //         return CircularProgressIndicator();
+  //       } else if (state.state == ResultState.HasData) {
+  //         return ListView.builder(
+  //           shrinkWrap: true,
+  //           itemCount: state.result.restaurants.length,
+  //           itemBuilder: (builder, index) {
+  //             final restaurant = state.result.restaurants[index];
+  //             return ListTile(title: Text(restaurant.name));
+  //           },
+  //         );
+  //       } else if (state.state == ResultState.NoData) {
+  //         return Center(
+  //           child: Text(state.message),
+  //         );
+  //       } else if (state.state == ResultState.Error) {
+  //         return Center(
+  //           child: Text(state.message),
+  //         );
+  //       } else {
+  //         return Center(
+  //           child: Text(''),
+  //         );
+  //       }
+  //     },
+  //   );
+  // }
+
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<SearchProvider>(
@@ -122,10 +134,11 @@ class _SearchPageState extends State<SearchPage> {
                           )),
                     ))),
             SafeArea(
-              child: Center(
+              child: Container(
+                margin: EdgeInsets.only(top: 100),
                 child: queries.isEmpty
-                    ? _restaurantResult(context) : Text('')
-                    // : _searchResultData(context),
+                    ? Center(child: Text(''))
+                    : _searchResultData(context),
               ),
             )
           ],

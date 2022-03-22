@@ -12,3 +12,4 @@ part 'cafe_card_1.dart';
 part 'food_widget.dart';
 part 'drink_widget.dart';
 part 'rating_star_1.dart';
+part 'custom_card.dart';
