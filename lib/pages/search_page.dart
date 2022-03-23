@@ -51,8 +51,24 @@ class _SearchPageState extends State<SearchPage> {
         ));
       } else if (state.state == SearchState.Error) {
         return Center(
-          child: Text(state.message),
-        );
+            child: Column(
+          children: [
+            Container(
+              margin: EdgeInsets.only(top: 200),
+              width: 100,
+              height: 100,
+              decoration: BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage('assets/icons/no-wifi.png'))),
+            ),
+            Container(
+              child: Text(
+                state.message,
+                style: resultText,
+              ),
+            )
+          ],
+        ));
       } else {
         return Center(
           child: Text(''),

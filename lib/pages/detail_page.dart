@@ -75,7 +75,7 @@ class _DetailPageState extends State<DetailPage> {
                         left: defMargin, top: defMargin, right: defMargin),
                     child: Text(
                       restaurant.restaurant.description,
-                      style: detailText,
+                      style: mainText,
                       textAlign: TextAlign.justify,
                     ),
                   ),

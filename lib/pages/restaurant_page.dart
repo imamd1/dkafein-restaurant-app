@@ -38,17 +38,24 @@ class RestaurantPage extends StatelessWidget {
                       Navigation.intentWithData(SearchPage.routeName, '');
                     },
                     child: Container(
-                        margin:
-                            EdgeInsets.fromLTRB(defMargin, 32, defMargin, 0),
-                        height: 32,
-                        width: 32,
-                        child: Icon(Icons.search),),
+                      margin: EdgeInsets.fromLTRB(defMargin, 32, defMargin, 0),
+                      height: 32,
+                      width: 32,
+                      child: Icon(Icons.search),
+                    ),
                   ),
                 ],
               ),
-              SizedBox(width: 16,),
-              Container(margin: EdgeInsets.fromLTRB(defMargin, 32, defMargin, 0),
-              child: Text('Daftar Restaurant', style: subtitle1,),),
+              SizedBox(
+                width: 16,
+              ),
+              Container(
+                margin: EdgeInsets.fromLTRB(defMargin, 32, defMargin, 0),
+                child: Text(
+                  'Daftar Restaurant',
+                  style: subtitle1,
+                ),
+              ),
               ListView.builder(
                   physics: NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
@@ -66,8 +73,24 @@ class RestaurantPage extends StatelessWidget {
         );
       } else if (state.state == ResultState.Error) {
         return Center(
-          child: Text(state.message),
-        );
+            child: Column(
+          children: [
+            Container(
+              margin: EdgeInsets.only(top: 200),
+              width: 100,
+              height: 100,
+              decoration: BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage('assets/icons/no-wifi.png'))),
+            ),
+            Container(
+              child: Text(
+                state.message,
+                style: resultText,
+              ),
+            )
+          ],
+        ));
       } else {
         return Center(
           child: Text(''),
