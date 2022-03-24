@@ -11,7 +11,7 @@ class CafeListCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
         onTap: () {
-           Navigation.intentWithData(DetailPage.routeName, restaurant.id);
+          Navigation.intentWithData(DetailPage.routeName, restaurant.id);
         },
         child: Container(
           margin: EdgeInsets.fromLTRB(defMargin, 24, defMargin, 0),

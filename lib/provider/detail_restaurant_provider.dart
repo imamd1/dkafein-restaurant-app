@@ -10,10 +10,7 @@ class DetailRestaurantProvider extends ChangeNotifier {
   late DetailResultState _state;
   String _message = '';
 
-  DetailRestaurantProvider({
-    required this.id,
-    required this.apiService
-  }) {
+  DetailRestaurantProvider({required this.id, required this.apiService}) {
     _getDetailRestaurant(id);
   }
 
@@ -26,10 +23,9 @@ class DetailRestaurantProvider extends ChangeNotifier {
       _state = DetailResultState.Loading;
       notifyListeners();
       final detailRestaurant = await apiService.detailRestaurant(id);
-      if(detailRestaurant.error) {
-        _state = DetailResultState.NoData; 
+      if (detailRestaurant.error) {
+        _state = DetailResultState.NoData;
         notifyListeners();
-        return _message = 'Empty Data';
       } else {
         _state = DetailResultState.HasData;
         notifyListeners();
@@ -38,7 +34,7 @@ class DetailRestaurantProvider extends ChangeNotifier {
     } catch (e) {
       _state = DetailResultState.Error;
       notifyListeners();
-      return _message = e.toString();
+      return _message = 'Whoops. Kamu tidak tersambung dengan Internet!';
     }
   }
 }

@@ -20,12 +20,15 @@ class MyApp extends StatelessWidget {
           SplashScreenPage.routeName: (context) => SplashScreenPage(),
           MainPage.routeName: (context) => MainPage(),
           RestaurantPage.routeName: (context) => RestaurantPage(),
-          DetailPage.routeName: (context) => DetailPage(id: ModalRoute.of(context)?.settings.arguments as String),
+          DetailPage.routeName: (context) => DetailPage(
+              id: ModalRoute.of(context)!.settings.arguments == null
+                  ? 'null'
+                  : ModalRoute.of(context)!.settings.arguments as String),
           SettingPage.routeName: (context) => SettingPage(),
           SearchPage.routeName: (context) => SearchPage(),
-          FavoritePage .routeName:(context) => FavoritePage(),
-          ReviewPage.routeName: (context) => ReviewPage(id: ModalRoute.of(context)?.settings.arguments as String),
-
+          FavoritePage.routeName: (context) => FavoritePage(),
+          ReviewPage.routeName: (context) => ReviewPage(
+              id: ModalRoute.of(context)!.settings.arguments as String),
         }
         // DetailScreen.routeName: (context) => DetailScreen(
         //   restaurant: ModalRoute.of(context)?.settings.arguments as Restaurant,

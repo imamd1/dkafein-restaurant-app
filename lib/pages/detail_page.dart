@@ -118,13 +118,29 @@ class _DetailPageState extends State<DetailPage> {
                 ],
               ),
             );
-          } else if (state.state == DetailResultState.NoData) {
+          } else if (state.state == DetailResultState.Error) {
             return Center(
-              child: Text(state.message),
-            );
+                child: Column(
+              children: [
+                Container(
+                  margin: EdgeInsets.only(top: 200),
+                  width: 100,
+                  height: 100,
+                  decoration: BoxDecoration(
+                      image: DecorationImage(
+                          image: AssetImage('assets/icons/no-wifi.png'))),
+                ),
+                Container(
+                  child: Text(
+                    state.message,
+                    style: resultText,
+                  ),
+                )
+              ],
+            ));
           } else {
             return Center(
-              child: Text(state.message),
+              child: Text(''),
             );
           }
         }
